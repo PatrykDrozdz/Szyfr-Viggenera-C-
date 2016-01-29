@@ -7,17 +7,35 @@ int main() {
 
 	int lenght = 0;
 
+	int lenght2 = 0;
+
+	int* intKey;
+
+	int* script;
+
+	char* buffor;
+
+	char* bufforKey;
+
 	fstream file;
 
-	file.open("dane.txt", ios::binary | ios::in);
+	fstream file2;
 
-	if (file.good() == true) {
+	file.open("dane.txt", ios::in);
+
+	file2.open("klucz.txt", ios::in);
+
+	if (file.good() == false) {
+		cout << "Brak dostepu do pliku" << endl;
+	}
+	else {
 
 		file.seekg(0, ios::end);
 		lenght = file.tellg();
 		file.seekg(0, ios::beg);
 
-		char* buffor = new char[lenght];
+		buffor = new char[lenght];
+		script = new int[lenght];
 
 		file.read(buffor, lenght);
 
@@ -28,20 +46,53 @@ int main() {
 
 
 		cout << "tekst z pliku: " << endl;
-		for (int i = 0; i < lenght; i++) {
 
-			cout << buffor[i];
+		cout.write(buffor, lenght);
+
+		cout << endl;
+		cout << endl;
+
+	}
+		
+	if (file2.good() == false) {
+			cout << "Brak dostepu do klucza" << endl;
 		}
+		else {
 
 
 
-	}
-	else {
-		cout << "Brak dostepu do pliku" << endl;
-	}
+			file2.seekg(0, ios::end);
+			lenght2 = file2.tellg();
+			file2.seekg(0, ios::beg);
+
+			bufforKey = new char[lenght2];
+
+			intKey = new int[lenght2];
+
+			file.read(bufforKey, lenght2);
+
+			cout << "Dlugosc klucza: " << lenght2 << endl;
+
+			cout << endl;
+			cout << endl;
+
+			cout << "klucz: " << endl;
+
+			cout.write(bufforKey, lenght2);
+
+		}
+	
+	
 
 	cout << endl;
 	cout << endl;
+
+	/*delete[]buffor;
+	delete[]script;
+
+	delete[]bufforKey;
+	delete[]intKey;*/
+	
 
 	system("pause");
 	return 0;
